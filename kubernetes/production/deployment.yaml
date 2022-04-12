@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mern-be
+  namespace: production
+  labels:
+    app: mern-be
+spec:
+  selector:
+    matchLabels:
+      app: mern-be
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: mern-be
+    spec:
+      containers:
+      - name: mern-be
+        image: agambewe/mern-be:latest
+        # imagePullPolicy: Always
+        ports:
+        - containerPort: 4000
+        resources:
+          limits:
+            cpu: 700m
+            memory: 800Mi
+          requests:
+            cpu: 200m
+            memory: 400Mi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mern-be-service
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: mern-be
+  ports:
+  - port: 4000 
+    protocol: "TCP"
