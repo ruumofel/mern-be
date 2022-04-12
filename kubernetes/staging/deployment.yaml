@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: mern-be
-        image: agambewe/mern-be:latest
+        image: ruum/mern-be:latest
         # imagePullPolicy: Always
         ports:
         - containerPort: 4000
